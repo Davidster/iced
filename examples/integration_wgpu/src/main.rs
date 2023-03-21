@@ -70,8 +70,11 @@ pub fn main() {
     let backend =
         wgpu::util::backend_bits_from_env().unwrap_or(default_backend);
 
-    let instance = wgpu::Instance::new(backend);
-    let surface = unsafe { instance.create_surface(&window) };
+    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
+        backends: backend,
+        ..Default::default()
+    });
+    let surface = unsafe { instance.create_surface(&window).unwrap() };
 
     let (format, (device, queue)) = futures::executor::block_on(async {
         let adapter = wgpu::util::initialize_adapter_from_env_or_default(
@@ -93,7 +96,8 @@ pub fn main() {
 
         (
             surface
-                .get_supported_formats(&adapter)
+                .get_capabilities(&adapter)
+                .formats
                 .first()
                 .copied()
                 .expect("Get preferred format"),
@@ -120,6 +124,7 @@ pub fn main() {
             height: physical_size.height,
             present_mode: wgpu::PresentMode::AutoVsync,
             alpha_mode: wgpu::CompositeAlphaMode::Auto,
+            view_formats: vec![],
         },
     );
 
@@ -214,7 +219,8 @@ pub fn main() {
                             width: size.width,
                             height: size.height,
                             present_mode: wgpu::PresentMode::AutoVsync,
-                            alpha_mode: wgpu::CompositeAlphaMode::Auto
+                            alpha_mode: wgpu::CompositeAlphaMode::Auto,
+                            view_formats: vec![]
                         },
                     );
 
