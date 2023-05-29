@@ -28,7 +28,7 @@ spirv = ["wgpu/spirv"]
 webgl = ["wgpu/webgl"]
 
 [dependencies]
-wgpu = "0.16"
+wgpu = { git = "https://github.com/gents83/wgpu.git" }
 wgpu_glyph = "0.20"
 glyph_brush = "0.7"
 raw-window-handle = "0.5"
