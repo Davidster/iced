@@ -29,7 +29,7 @@ webgl = ["wgpu/webgl"]
 
 [dependencies]
 wgpu = { git = "https://github.com/gents83/wgpu.git" }
-wgpu_glyph = "0.20"
+wgpu_glyph = { git = "https://github.com/Davidster/wgpu_glyph.git", branch = "wgpu_arcanized" }
 glyph_brush = "0.7"
 raw-window-handle = "0.5"
 log = "0.4"
