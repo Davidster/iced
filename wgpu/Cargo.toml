@@ -28,8 +28,8 @@ spirv = ["wgpu/spirv"]
 webgl = ["wgpu/webgl"]
 
 [dependencies]
-wgpu = "0.16"
-wgpu_glyph = "0.20"
+wgpu = { path = "../../wgpu/wgpu" }
+wgpu_glyph = { path = "../../wgpu_glyph_fork" }
 glyph_brush = "0.7"
 raw-window-handle = "0.5"
 log = "0.4"
